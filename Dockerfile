@@ -35,11 +35,7 @@ WORKDIR /app/server
 COPY server/package*.json ./
 RUN npm install --omit=dev
 COPY --from=server-builder /app/server/dist ./dist
-COPY server/src/db/schema.sql ./dist/db/schema.sql
 
 EXPOSE 5000
 
-# Auto-seed happens on boot if SQLite database is empty.
-# NOTE: Without a persistent disk mount on Render, the SQLite database resets on each redeploy and automatically reseeds on boot.
 CMD ["npm", "start"]
-

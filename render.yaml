@@ -2,15 +2,14 @@
 services:
   - type: web
     name: envision-studio
-    env: node
+    runtime: node
     plan: free
-    buildCommand: npm run build:all
+    buildCommand: npm --prefix client install && npm --prefix server install && npm run build:all
     startCommand: npm run start:server
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
-    # NOTE: On Render free tier without a persistent disk mount, the SQLite database resets on every redeploy
-    # and automatically reseeds from /data/mock.json upon container boot.
-
+      - key: MONGODB_URI
+        sync: false
