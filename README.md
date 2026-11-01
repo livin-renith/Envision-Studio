@@ -1,6 +1,13 @@
 # Envision-Studio
 
-A production-quality digital agency marketing website and integrated Project Management Dashboard web app built with React, Vite, Tailwind CSS, Three.js (lazy-loaded), Lenis smooth scroll, Node.js + Express, and MongoDB (`mongoose`).
+[![Live Demo on Render](https://img.shields.io/badge/Render-Live%20Demo-brightgreen?style=for-the-badge&logo=render)](https://envision-studio.onrender.com)
+[![MongoDB Atlas](https://img.shields.io/badge/MongoDB%20Atlas-Cloud%20Database-green?style=for-the-badge&logo=mongodb)](https://cloud.mongodb.com)
+
+> 🌐 **Live Production App**: [https://envision-studio.onrender.com](https://envision-studio.onrender.com)  
+> 📊 **Project Management Dashboard**: [https://envision-studio.onrender.com/app](https://envision-studio.onrender.com/app)  
+> 🩺 **Live API Health Check**: [https://envision-studio.onrender.com/api/health](https://envision-studio.onrender.com/api/health)
+
+A production-quality digital agency marketing website and integrated Project Management Dashboard web app built with React, Vite, Tailwind CSS, Three.js (lazy-loaded), Lenis smooth scroll, Node.js + Express, and MongoDB Atlas (`mongoose`).
 
 ---
 
@@ -27,7 +34,7 @@ npm install
 Copy the `.env.example` in `/server`:
 ```env
 PORT=5000
-MONGODB_URI=mongodb://127.0.0.1:27017/envision_studio
+MONGODB_URI=mongodb+srv://Envision:envision123@cluster0.nrpxu9h.mongodb.net/envision_studio?retryWrites=true&w=majority
 ```
 
 ### 3. Database Seeding
@@ -86,7 +93,7 @@ npm test
 | **Smooth Scrolling** | **Lenis** | Silky momentum-based inertia scroll enabled exclusively on the marketing landing page and cleanly torn down on `/app/*` dashboard routes. |
 | **Backend Framework** | **Express.js** | Lightweight REST foundation with clean MVC separation (`routes/`, `controllers/`, `services/`, `models/`). |
 | **Validation** | **Zod** | Runtime contract validation ensuring strict type safety on all endpoints. |
-| **Database Engine** | **MongoDB (`mongoose`)** | Scalable document store with atomic auto-increment sequential ID counter for frontend routing parity and full relational aggregation pipelines. |
+| **Database Engine** | **MongoDB Atlas (`mongoose`)** | Cloud document store with atomic auto-increment sequential ID counter for frontend routing parity and full relational aggregation pipelines. |
 | **Testing** | **Vitest + Supertest** | Lightning-fast test runner with native ESM execution and end-to-end HTTP integration assertions. |
 
 ---
@@ -97,7 +104,7 @@ All REST endpoints are rooted at `/api`:
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `GET` | `/api/health` | Service health status and MongoDB connection state |
+| `GET` | `/api/health` | Service health status and MongoDB Atlas connection state |
 | `GET` | `/api/dashboard/summary` | Aggregate metrics (totals, active, completion rates, deadlines) |
 | `GET` | `/api/projects` | List all projects (supports optional `?status=Active\|Completed\|On Hold`) |
 | `POST` | `/api/projects` | Create a new project (validated via Zod) |
@@ -113,13 +120,19 @@ All REST endpoints are rooted at `/api`:
 
 ## ☁️ Deployment
 
+### Live Production Deployment on Render
+The application is deployed as a single unified service on Render:
+* **Web App**: [https://envision-studio.onrender.com](https://envision-studio.onrender.com)
+* **Dashboard**: [https://envision-studio.onrender.com/app](https://envision-studio.onrender.com/app)
+* **API Health**: [https://envision-studio.onrender.com/api/health](https://envision-studio.onrender.com/api/health)
+
 ### Docker Deployment
 The repository includes a ready-to-deploy multi-stage `Dockerfile`:
 
 ```bash
 # Build & run production container locally
 docker build -t envision-studio .
-docker run -p 5000:5000 -e MONGODB_URI="your-mongodb-atlas-uri" envision-studio
+docker run -p 5000:5000 -e MONGODB_URI="mongodb+srv://Envision:envision123@cluster0.nrpxu9h.mongodb.net/envision_studio?retryWrites=true&w=majority" envision-studio
 ```
 
 ---
@@ -131,4 +144,4 @@ docker run -p 5000:5000 -e MONGODB_URI="your-mongodb-atlas-uri" envision-studio
   - [x] 15/15 automated Vitest + Supertest API integration tests
   - [x] Single-service compilation and HTTP probing across `/api/health`, `/api/dashboard/summary`, and SPA fallback routes
   - [x] TypeScript strict compilation (`tsc -b` on client and server)
-  - [x] MongoDB migration complete with zero SQLite dependencies remaining
+  - [x] MongoDB Atlas migration complete with cloud seeding verified
